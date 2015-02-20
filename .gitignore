@@ -2,7 +2,7 @@
 build
 .gradle
 gradle
-
+*~
 *.irp
 *.iws
 *.iml
