@@ -24,6 +24,7 @@
 
 package com.hackerearth.heapi.sdk.requests;
 
+import com.google.gson.Gson;
 import com.hackerearth.heapi.sdk.options.RunOptions;
 import com.hackerearth.heapi.sdk.responses.RunResponse;
 
@@ -35,15 +36,13 @@ public class RunRequest extends BaseRequest {
         super(clientSecret, params);
     }
 
-    public String build_url(){
-        return null;
-    }
-
     @Override
     public RunResponse Execute(){
+        Gson gson = new Gson();
+        this.options.setClientSecret(this.clientSecret);
+        String jsonOptions = gson.toJson(this.options, RunOptions.class);
+        String response = sendRequest(RUN_ENDPOINT, jsonOptions);
         return null;
     }
-
-
 }
 

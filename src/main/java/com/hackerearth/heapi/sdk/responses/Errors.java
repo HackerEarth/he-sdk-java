@@ -22,28 +22,13 @@
  * SOFTWARE.
  */
 
-package com.hackerearth.heapi.sdk.requests;
 
-import com.google.gson.Gson;
-import com.hackerearth.heapi.sdk.options.CompileOptions;
-import com.hackerearth.heapi.sdk.responses.CompileResponse;
+package com.hackerearth.heapi.sdk.responses;
 
-public class CompileRequest extends  BaseRequest{
+import javax.annotation.Generated;
 
-    public static final String COMPILE_ENDPOINT = "http://api.hackerearth.com/code/compile/";
+@Generated("org.jsonschema2pojo")
+public class Errors {
 
-    public CompileRequest(String clientSecret, CompileOptions params){
-        super(clientSecret, params);
-    }
 
-    @Override
-    public CompileResponse Execute(){
-        Gson gson = new Gson();
-        this.options.setClientSecret(this.clientSecret);
-
-        String jsonOptions = gson.toJson(this.options, CompileOptions.class);
-        String responseString = sendRequest(COMPILE_ENDPOINT, jsonOptions);
-        CompileResponse response = gson.fromJson(responseString, CompileResponse.class);
-        return response;
-    }
 }
