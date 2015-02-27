@@ -24,6 +24,7 @@
 
 package com.hackerearth.heapi.sdk.requests;
 
+import com.google.gson.Gson;
 import com.hackerearth.heapi.sdk.options.CompileOptions;
 import com.hackerearth.heapi.sdk.responses.CompileResponse;
 
@@ -37,6 +38,11 @@ public class CompileRequest extends  BaseRequest{
 
     @Override
     public CompileResponse Execute(){
+        Gson gson = new Gson();
+        this.options.setClientSecret(this.clientSecret);
+
+        String jsonOptions = gson.toJson(this.options, CompileOptions.class);
+        sendRequest(COMPILE_ENDPOINT, jsonOptions);
         return null;
     }
 }

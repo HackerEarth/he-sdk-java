@@ -27,10 +27,21 @@ package com.hackerearth.heapi.sdk.requests;
 import com.hackerearth.heapi.sdk.options.BaseOptions;
 import com.hackerearth.heapi.sdk.responses.BaseResponse;
 
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import sun.net.www.http.HttpClient;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
 public class BaseRequest {
 
     public final BaseOptions options;
-    private final String clientSecret;
+    protected final String clientSecret;
+    public final String USER_AGENT = "Mozilla/5.0";
 
     public BaseRequest(String clientSecret, BaseOptions options){
         this.clientSecret = clientSecret;
@@ -41,6 +52,24 @@ public class BaseRequest {
         return null;
     }
 
+    public String sendRequest(final String endpoint, final String jsonOptions){
+        try {
+            HttpPost httpPost = new HttpPost(endpoint);
+            httpPost.setEntity(new StringEntity(jsonOptions));
+            httpPost.setHeader("Accept", "application/json");
+            httpPost.setHeader("Content-type", "application/json");
+            HttpClient client = HttpClientBuilder.create().build();
+
+            new dexecute(httpPost);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     //Blocking IO.
     public BaseResponse waitForResult(){
         return null;

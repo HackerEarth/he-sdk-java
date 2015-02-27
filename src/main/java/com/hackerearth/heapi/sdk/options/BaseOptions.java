@@ -37,6 +37,10 @@ public class BaseOptions {
     @Expose
     public String language;
 
+    @SerializedName("client_secret")
+    @Expose
+    public String clientSecret;
+
     @SerializedName("callback")
     @Expose
     public String callback;
@@ -68,6 +72,14 @@ public class BaseOptions {
 
     public void setCompressed(String compressed) {
         this.compressed = compressed;
+    }
+
+    public String getClientSecret() {
+        return clientSecret;
+    }
+
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
     }
 
     public String getAsync() {
