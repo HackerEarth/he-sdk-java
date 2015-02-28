@@ -32,18 +32,18 @@ import com.hackerearth.heapi.sdk.responses.RunResponse;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 public class TestCompile {
 
     private final String clientSecret =  "f6c5dceeb3df56b32ab42e70da8584dff13dc744";
 
-    private final String testSource = "#include <stdio.h>" +
-            "int main(){" +
-            "printf('HelloWorld');" +
-            "return 0;" +
-            "}";
+    private final String testSource = getStringResource("/helloworld.cpp");
 
     @Test
     public void TestOptions(){
+        Assert.assertNotNull(testSource);
         CompileOptions options = new CompileOptions(testSource, SupportedLanguages.CPP);
         String jsonOptions = options.getJson();
         Assert.assertNotNull(jsonOptions);
@@ -51,11 +51,28 @@ public class TestCompile {
 
     @Test
     public void TestRequest(){
+        Assert.assertNotNull(testSource);
         HackerEarthAPI apiHandle  = new HackerEarthAPI(clientSecret);
         RunOptions options = new RunOptions(testSource, SupportedLanguages.CPP);
         RunResponse response = apiHandle.Run(options);
         Assert.assertNotNull(response);
         Assert.assertNotNull(response.getMessage());
-        System.out.print(response.getMessage());
+    }
+
+    private String getStringResource(String fileName){
+        try {
+            BufferedReader rd = new BufferedReader(new InputStreamReader(
+                    getClass().getResourceAsStream(fileName)));
+            StringBuffer resultBuffer = new StringBuffer();
+            String line="";
+            while((line = rd.readLine())!= null){
+                resultBuffer.append(line);
+            }
+            return resultBuffer.toString();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

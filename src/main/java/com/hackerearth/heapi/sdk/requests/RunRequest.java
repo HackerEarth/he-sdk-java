@@ -30,7 +30,7 @@ import com.hackerearth.heapi.sdk.responses.RunResponse;
 
 public class RunRequest extends BaseRequest {
 
-    public static final String RUN_ENDPOINT = "http://api.hackerearth.com/code/run/";
+    public static final String RUN_ENDPOINT = "https://api.hackerearth.com/v3/code/run/";
 
     public RunRequest(String clientSecret, RunOptions params){
         super(clientSecret, params);
