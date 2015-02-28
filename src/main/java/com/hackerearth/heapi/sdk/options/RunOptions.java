@@ -52,7 +52,7 @@ public class RunOptions extends BaseOptions {
 
     public String callback = "";
 
-    public RunOptions(String sourceCode, String Language){
+    public RunOptions(String sourceCode, SupportedLanguages Language){
         super(sourceCode, Language);
     }
 

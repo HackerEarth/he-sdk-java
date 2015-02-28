@@ -41,8 +41,9 @@ public class RunRequest extends BaseRequest {
         Gson gson = new Gson();
         this.options.setClientSecret(this.clientSecret);
         String jsonOptions = gson.toJson(this.options, RunOptions.class);
-        String response = sendRequest(RUN_ENDPOINT, jsonOptions);
-        return null;
+        String responseString = sendRequest(RUN_ENDPOINT, jsonOptions);
+        RunResponse response = gson.fromJson(responseString, RunResponse.class);
+        return response;
     }
 }
 

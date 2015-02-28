@@ -35,7 +35,7 @@ public class BaseOptions {
 
     @SerializedName("lang")
     @Expose
-    public String language;
+    public SupportedLanguages language;
 
     @SerializedName("client_secret")
     @Expose
@@ -53,7 +53,7 @@ public class BaseOptions {
     @Expose
     public String async;
 
-    public BaseOptions(String sourceCode, String language){
+    public BaseOptions(String sourceCode, SupportedLanguages language){
         this.sourceCode = sourceCode;
         this.language = language;
     }
@@ -95,7 +95,7 @@ public class BaseOptions {
 
     }
 
-    public void setLanguage(String language) {
+    public void setLanguage(SupportedLanguages language) {
         this.language = language;
     }
 
@@ -106,7 +106,7 @@ public class BaseOptions {
 
     }
 
-    public String getLanguage() {
+    public SupportedLanguages getLanguage() {
         return language;
     }
 

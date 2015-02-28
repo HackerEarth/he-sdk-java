@@ -21,38 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.hackerearth.heapi.sdk.options;
+package com.hackerearth.heapi.sdk;
+import com.google.gson.Gson;
+import com.hackerearth.heapi.sdk.client.HackerEarthAPI;
+import com.hackerearth.heapi.sdk.options.CompileOptions;
+import com.hackerearth.heapi.sdk.options.SupportedLanguages;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import org.junit.Assert;
+import org.junit.Test;
 
-public class CompileOptions extends BaseOptions {
+public class TestCompile {
 
-    @SerializedName("id")
-    @Expose
-    public String id;
+    private static final String clientSecret =  "f6c5dceeb3df56b32ab42e70da8584dff13dc744";
 
-    @SerializedName("save")
-    @Expose
-    public String save;
+    @Test
+    public void TestRequest(){
+        HackerEarthAPI apiHandle  = new HackerEarthAPI(clientSecret);
+        String source = "#include <stdio.h>" +
+                "using namespace std;" +
+                "int main(){" +
+                "  printf('HelloWorld');" +
+                "}";
 
-    public CompileOptions(String sourceCode, SupportedLanguages language){
-        super(sourceCode, language);
-    }
+        CompileOptions options = new CompileOptions(source, SupportedLanguages.CPP);
+        Gson gson = new Gson();
+        String jsonOptions = gson.toJson(options, CompileOptions.class);
+        System.out.println(jsonOptions);
 
-    public String getSave() {
-        return save;
-    }
-
-    public void setSave(String save) {
-        this.save = save;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+        Assert.assertNotNull(jsonOptions);
     }
 }
