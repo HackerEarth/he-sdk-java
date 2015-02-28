@@ -44,13 +44,7 @@ public class RunOptions extends BaseOptions {
     @Expose
     public String html;
 
-    public int async = 1;
-
-    public int compressed = 1;
-
     public int save = 1;
-
-    public String callback = "";
 
     public RunOptions(String sourceCode, SupportedLanguages Language){
         super(sourceCode, Language);

@@ -25,29 +25,37 @@ package com.hackerearth.heapi.sdk;
 import com.google.gson.Gson;
 import com.hackerearth.heapi.sdk.client.HackerEarthAPI;
 import com.hackerearth.heapi.sdk.options.CompileOptions;
+import com.hackerearth.heapi.sdk.options.RunOptions;
 import com.hackerearth.heapi.sdk.options.SupportedLanguages;
 
+import com.hackerearth.heapi.sdk.responses.RunResponse;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class TestCompile {
 
-    private static final String clientSecret =  "f6c5dceeb3df56b32ab42e70da8584dff13dc744";
+    private final String clientSecret =  "f6c5dceeb3df56b32ab42e70da8584dff13dc744";
+
+    private final String testSource = "#include <stdio.h>" +
+            "int main(){" +
+            "printf('HelloWorld');" +
+            "return 0;" +
+            "}";
+
+    @Test
+    public void TestOptions(){
+        CompileOptions options = new CompileOptions(testSource, SupportedLanguages.CPP);
+        String jsonOptions = options.getJson();
+        Assert.assertNotNull(jsonOptions);
+    }
 
     @Test
     public void TestRequest(){
         HackerEarthAPI apiHandle  = new HackerEarthAPI(clientSecret);
-        String source = "#include <stdio.h>" +
-                "using namespace std;" +
-                "int main(){" +
-                "  printf('HelloWorld');" +
-                "}";
-
-        CompileOptions options = new CompileOptions(source, SupportedLanguages.CPP);
-        Gson gson = new Gson();
-        String jsonOptions = gson.toJson(options, CompileOptions.class);
-        System.out.println(jsonOptions);
-
-        Assert.assertNotNull(jsonOptions);
+        RunOptions options = new RunOptions(testSource, SupportedLanguages.CPP);
+        RunResponse response = apiHandle.Run(options);
+        Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getMessage());
+        System.out.print(response.getMessage());
     }
 }

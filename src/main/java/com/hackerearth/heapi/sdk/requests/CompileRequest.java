@@ -40,7 +40,6 @@ public class CompileRequest extends  BaseRequest{
     public CompileResponse Execute(){
         Gson gson = new Gson();
         this.options.setClientSecret(this.clientSecret);
-
         String jsonOptions = gson.toJson(this.options, CompileOptions.class);
         String responseString = sendRequest(COMPILE_ENDPOINT, jsonOptions);
         CompileResponse response = gson.fromJson(responseString, CompileResponse.class);

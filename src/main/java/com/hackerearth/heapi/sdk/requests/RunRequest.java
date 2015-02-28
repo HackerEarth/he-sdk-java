@@ -30,7 +30,7 @@ import com.hackerearth.heapi.sdk.responses.RunResponse;
 
 public class RunRequest extends BaseRequest {
 
-    public static final String RUN_ENDPOINT = "http://api.hackerearth.com/code/run/";;
+    public static final String RUN_ENDPOINT = "http://api.hackerearth.com/code/run/";
 
     public RunRequest(String clientSecret, RunOptions params){
         super(clientSecret, params);
@@ -41,7 +41,9 @@ public class RunRequest extends BaseRequest {
         Gson gson = new Gson();
         this.options.setClientSecret(this.clientSecret);
         String jsonOptions = gson.toJson(this.options, RunOptions.class);
+        System.out.println(jsonOptions);
         String responseString = sendRequest(RUN_ENDPOINT, jsonOptions);
+        System.out.println(responseString);
         RunResponse response = gson.fromJson(responseString, RunResponse.class);
         return response;
     }

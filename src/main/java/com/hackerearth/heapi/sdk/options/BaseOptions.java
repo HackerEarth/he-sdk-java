@@ -110,5 +110,9 @@ public class BaseOptions {
         return language;
     }
 
+    public String getJson(){
+        Gson gson = new Gson();
+        return gson.toJson(this, this.getClass());
+    }
 
 }
