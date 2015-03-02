@@ -26,6 +26,12 @@ package com.hackerearth.heapi.sdk.options;
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class BaseOptions {
 
@@ -53,12 +59,23 @@ public class BaseOptions {
     @Expose
     public String async;
 
+    @SerializedName("save")
+    @Expose
+    public String save;
+
+    @SerializedName("id")
+    @Expose
+    public String id;
+
     public BaseOptions(String sourceCode, SupportedLanguages language){
         this.sourceCode = sourceCode;
         this.language = language;
     }
 
     public String getCallback() {
+        if (this.callback == null){
+            return "";
+        }
         return callback;
     }
 
@@ -67,6 +84,9 @@ public class BaseOptions {
     }
 
     public String getCompressed() {
+        if(this.compressed == null){
+            return "1";
+        }
         return compressed;
     }
 
@@ -83,6 +103,10 @@ public class BaseOptions {
     }
 
     public String getAsync() {
+
+        if(this.async == null){
+            return "0";
+        }
         return async;
     }
 
@@ -99,13 +123,6 @@ public class BaseOptions {
         this.language = language;
     }
 
-    protected String getParams(){
-        Gson gson = new Gson();
-        String json_text = gson.toJson(this);
-        return json_text;
-
-    }
-
     public SupportedLanguages getLanguage() {
         return language;
     }
@@ -115,4 +132,37 @@ public class BaseOptions {
         return gson.toJson(this, this.getClass());
     }
 
+    public String getSave() {
+        if(this.save == null){
+            return "1";
+        }
+        return save;
+    }
+
+    public void setSave(String save) {
+        this.save = save;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<NameValuePair> getURLParameters(){
+        List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+        parameters.add(new BasicNameValuePair("source", getSourceCode()));
+        parameters.add(new BasicNameValuePair("lang", getLanguage().getValue()));
+        parameters.add(new BasicNameValuePair("client_secret", getClientSecret()));
+        /*
+        parameters.add(new BasicNameValuePair("async", getAsync()));
+        parameters.add(new BasicNameValuePair("callback", getCallback()));
+        parameters.add(new BasicNameValuePair("save", getSave()));
+        parameters.add(new BasicNameValuePair("id", id));
+        parameters.add(new BasicNameValuePair("compressed", getCompressed()));
+        */
+        return parameters;
+    }
 }

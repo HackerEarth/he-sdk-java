@@ -27,10 +27,13 @@ package com.hackerearth.heapi.sdk.requests;
 import com.google.gson.Gson;
 import com.hackerearth.heapi.sdk.options.CompileOptions;
 import com.hackerearth.heapi.sdk.responses.CompileResponse;
+import org.apache.http.NameValuePair;
+
+import java.util.List;
 
 public class CompileRequest extends  BaseRequest{
 
-    public static final String COMPILE_ENDPOINT = "http://api.hackerearth.com/code/compile/";
+    public static final String COMPILE_ENDPOINT = "https://api.hackerearth.com/v3/code/compile/";
 
     public CompileRequest(String clientSecret, CompileOptions params){
         super(clientSecret, params);
@@ -40,8 +43,8 @@ public class CompileRequest extends  BaseRequest{
     public CompileResponse Execute(){
         Gson gson = new Gson();
         this.options.setClientSecret(this.clientSecret);
-        String jsonOptions = gson.toJson(this.options, CompileOptions.class);
-        String responseString = sendRequest(COMPILE_ENDPOINT, jsonOptions);
+        List<NameValuePair> parameters = this.options.getURLParameters();
+        String responseString = sendRequest(COMPILE_ENDPOINT, parameters);
         CompileResponse response = gson.fromJson(responseString, CompileResponse.class);
         return response;
     }

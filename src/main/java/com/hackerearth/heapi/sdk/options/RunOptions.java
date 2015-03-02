@@ -25,9 +25,17 @@ package com.hackerearth.heapi.sdk.options;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
-public class RunOptions extends BaseOptions {
+import java.util.List;
 
+public class RunOptions extends CompileOptions {
+
+
+    public static final String RUN_TIME_UPPER_LIMIT = "5";
+
+    public static final String MEMORY_UPPER_LIMIT = "262144";
     @SerializedName("compiled")
     @Expose
     public String compiled;
@@ -51,6 +59,9 @@ public class RunOptions extends BaseOptions {
     }
 
     public String getTimeLimit() {
+        if(timeLimit == null){
+            return RUN_TIME_UPPER_LIMIT;
+        }
         return timeLimit;
     }
 
@@ -59,6 +70,9 @@ public class RunOptions extends BaseOptions {
     }
 
     public String getCompiled() {
+        if(compiled == null){
+            return "0";
+        }
         return compiled;
     }
 
@@ -67,6 +81,9 @@ public class RunOptions extends BaseOptions {
     }
 
     public String getMemoryLimit() {
+        if(memoryLimit == null){
+            return MEMORY_UPPER_LIMIT;
+        }
         return memoryLimit;
     }
 
@@ -75,11 +92,25 @@ public class RunOptions extends BaseOptions {
     }
 
     public String getHtml() {
+        if(html == null){
+            return "0";
+        }
         return html;
     }
 
     public void setHtml(String html) {
         this.html = html;
+    }
+
+    @Override
+    public List<NameValuePair> getURLParameters(){
+        List<NameValuePair> parameters = super.getURLParameters();
+        /*parameters.add(new BasicNameValuePair("html", getHtml()));
+        parameters.add(new BasicNameValuePair("compiled", getCompiled()));
+        parameters.add(new BasicNameValuePair("memory_limit", getMemoryLimit()));
+        parameters.add(new BasicNameValuePair("time_limit", getTimeLimit()));
+        */
+        return parameters;
     }
 
 }

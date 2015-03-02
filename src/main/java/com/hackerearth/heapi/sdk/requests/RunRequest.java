@@ -27,6 +27,9 @@ package com.hackerearth.heapi.sdk.requests;
 import com.google.gson.Gson;
 import com.hackerearth.heapi.sdk.options.RunOptions;
 import com.hackerearth.heapi.sdk.responses.RunResponse;
+import org.apache.http.NameValuePair;
+
+import java.util.List;
 
 public class RunRequest extends BaseRequest {
 
@@ -40,10 +43,8 @@ public class RunRequest extends BaseRequest {
     public RunResponse Execute(){
         Gson gson = new Gson();
         this.options.setClientSecret(this.clientSecret);
-        String jsonOptions = gson.toJson(this.options, RunOptions.class);
-        System.out.println(jsonOptions);
-        String responseString = sendRequest(RUN_ENDPOINT, jsonOptions);
-        System.out.println(responseString);
+        List<NameValuePair> options = this.options.getURLParameters();
+        String responseString = sendRequest(RUN_ENDPOINT, options);
         RunResponse response = gson.fromJson(responseString, RunResponse.class);
         return response;
     }
