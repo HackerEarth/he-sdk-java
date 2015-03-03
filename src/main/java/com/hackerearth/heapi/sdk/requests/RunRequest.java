@@ -24,26 +24,29 @@
 
 package com.hackerearth.heapi.sdk.requests;
 
+import com.google.gson.Gson;
 import com.hackerearth.heapi.sdk.options.RunOptions;
 import com.hackerearth.heapi.sdk.responses.RunResponse;
+import org.apache.http.NameValuePair;
+
+import java.util.List;
 
 public class RunRequest extends BaseRequest {
 
-    public static final String RUN_ENDPOINT = "http://api.hackerearth.com/code/run/";;
+    public static final String RUN_ENDPOINT = "https://api.hackerearth.com/v3/code/run/";
 
     public RunRequest(String clientSecret, RunOptions params){
         super(clientSecret, params);
     }
 
-    public String build_url(){
-        return null;
-    }
-
     @Override
     public RunResponse Execute(){
-        return null;
+        Gson gson = new Gson();
+        this.options.setClientSecret(this.clientSecret);
+        List<NameValuePair> options = this.options.getURLParameters();
+        String responseString = sendRequest(RUN_ENDPOINT, options);
+        RunResponse response = gson.fromJson(responseString, RunResponse.class);
+        return response;
     }
-
-
 }
 

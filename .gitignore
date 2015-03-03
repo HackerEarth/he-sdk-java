@@ -4,5 +4,6 @@ build
 gradle
 *~
 *.irp
+*.ipr
 *.iws
 *.iml

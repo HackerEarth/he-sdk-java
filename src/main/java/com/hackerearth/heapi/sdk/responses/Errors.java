@@ -21,23 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.hackerearth.heapi.sdk.options;
-
-import org.apache.http.NameValuePair;
-
-import java.util.HashMap;
-import java.util.List;
-
-public class CompileOptions extends BaseOptions {
 
 
-    public CompileOptions(String sourceCode, SupportedLanguages language){
-        super(sourceCode, language);
-    }
+package com.hackerearth.heapi.sdk.responses;
 
-    @Override
-    public List<NameValuePair> getURLParameters(){
-        List<NameValuePair> parameters = super.getURLParameters();
-        return parameters;
-    }
+import javax.annotation.Generated;
+
+@Generated("org.jsonschema2pojo")
+public class Errors {
+
+
 }
