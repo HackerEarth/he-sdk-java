@@ -156,13 +156,14 @@ public class BaseOptions {
         parameters.add(new BasicNameValuePair("source", getSourceCode()));
         parameters.add(new BasicNameValuePair("lang", getLanguage().getValue()));
         parameters.add(new BasicNameValuePair("client_secret", getClientSecret()));
-        /*
         parameters.add(new BasicNameValuePair("async", getAsync()));
         parameters.add(new BasicNameValuePair("callback", getCallback()));
         parameters.add(new BasicNameValuePair("save", getSave()));
-        parameters.add(new BasicNameValuePair("id", id));
+        if(id != null) {
+            parameters.add(new BasicNameValuePair("id", id));
+        }
         parameters.add(new BasicNameValuePair("compressed", getCompressed()));
-        */
+
         return parameters;
     }
 }

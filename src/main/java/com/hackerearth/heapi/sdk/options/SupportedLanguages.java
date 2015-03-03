@@ -26,7 +26,16 @@ package com.hackerearth.heapi.sdk.options;
 public enum SupportedLanguages {
     CPP("CPP"),
     JAVA("JAVA"),
-    PYTHON("PYTHON");
+    PYTHON("PYTHON"),
+    C("C"),
+    JAVASCRIPT("JAVASCRIPT"),
+    HASKELL("HASKELL"),
+    PERL("PERL"),
+    PHP("PHP"),
+    RUBY("RUBY"),
+    CLOJURE("CLOJURE"),
+    CSHARP("CSHARP"),
+    CPP11("CPP11");
 
     private String value;
 

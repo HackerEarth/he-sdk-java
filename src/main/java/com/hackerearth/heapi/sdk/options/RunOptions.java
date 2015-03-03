@@ -105,11 +105,10 @@ public class RunOptions extends CompileOptions {
     @Override
     public List<NameValuePair> getURLParameters(){
         List<NameValuePair> parameters = super.getURLParameters();
-        /*parameters.add(new BasicNameValuePair("html", getHtml()));
+        parameters.add(new BasicNameValuePair("html", getHtml()));
         parameters.add(new BasicNameValuePair("compiled", getCompiled()));
         parameters.add(new BasicNameValuePair("memory_limit", getMemoryLimit()));
         parameters.add(new BasicNameValuePair("time_limit", getTimeLimit()));
-        */
         return parameters;
     }
 
