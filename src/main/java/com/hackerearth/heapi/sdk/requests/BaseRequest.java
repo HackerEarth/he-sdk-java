@@ -63,7 +63,7 @@ public class BaseRequest {
         try {
             HttpPost httpPost = new HttpPost(endpoint);
             httpPost.setEntity(new UrlEncodedFormEntity(options));
-            httpPost.setHeader("Content-type", "application/json");
+            //httpPost.setHeader("Content-type", "application/json");
             HttpClient client = HttpClientBuilder.create().build();
             HttpResponse response = client.execute(httpPost);
             BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
