@@ -39,8 +39,9 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
 public class TestCompile {
-
-    private final String clientSecret = "f6c5dceeb3df56b32ab42e70da8584dff13dc744";
+    
+    // replace it with your secret
+    private final String clientSecret = "clientSecret";
 
     private final String testSource = getStringResource("/helloworld.cpp");
 
